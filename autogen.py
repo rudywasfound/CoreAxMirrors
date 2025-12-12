@@ -64,7 +64,7 @@ def clear_page():
 
 def main():
     page1 = (Path("x86_64"),)
-    page2 = (Path("testing/x86_64"),)
+    # page2 = (Path("testing/x86_64"),)
 
     clear_page()
 
@@ -76,7 +76,7 @@ def main():
     # The second argument points to the root from the current page
     # Make sure that you add '/' at the end of the root path to consider it as a directory
     generate_page(page1, "../", index_text)
-    generate_page(page2, "../../")
+    # generate_page(page2, "../../")
 
 if __name__ == "__main__":
     main()
