@@ -28,7 +28,7 @@ jobs:
         name: Restore Kernel cache
         with:
           path: kernel-cache.txt
-          key: kernel-cache-v3
+          key: kernel-cache-v4
 
       - name: Install dependencies
         run: |
@@ -128,7 +128,7 @@ jobs:
         if: always()
         with:
           path: kernel-cache.txt
-          key: kernel-cache-v3
+          key: kernel-cache-v4
 
       - name: Write Secure Boot key
         run: |
@@ -211,7 +211,7 @@ jobs:
             -v "$GITHUB_WORKSPACE":"$GITHUB_WORKSPACE" \
             -w "$GITHUB_WORKSPACE" \
             archlinux:latest \
-            sh -c "pacman -Sy --noconfirm pacman-contrib && ./add_new_pkgs.sh"
+            sh -c "pacman -Sy --noconfirm pacman-contrib python && ./add_new_pkgs.sh"
 
       - name: Commit and push changes
         run: |
