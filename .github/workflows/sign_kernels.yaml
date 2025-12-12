@@ -28,7 +28,7 @@ jobs:
         name: Restore Kernel cache
         with:
           path: kernel-cache.txt
-          key: kernel-cache-v2
+          key: kernel-cache-v3
 
       - name: Install dependencies
         run: |
@@ -63,7 +63,7 @@ jobs:
           echo ""
 
           if [ ! -f "$CACHE_FILE" ]; then
-            echo "## Cache file missing — creating new one"
+            echo "## Cache file missing. Creating new one..."
             printf "%s\n%s\n%s\n" \
               "${{ steps.versions.outputs.lts }}" \
               "${{ steps.versions.outputs.normal }}" \
@@ -128,7 +128,7 @@ jobs:
         if: always()
         with:
           path: kernel-cache.txt
-          key: kernel-cache-v2
+          key: kernel-cache-v3
 
       - name: Write Secure Boot key
         run: |
