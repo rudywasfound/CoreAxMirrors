@@ -160,11 +160,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install GIT LFS
+        run: |
+          git lfs install
+
       - name: Download signed kernels
         uses: actions/download-artifact@v4
         with:
           name: signed-kernels
           path: ${{ github.workspace }}/new
+
+      - name: Track files with GIT LFS
+        run: |
+          git lfs track "x86_64/*.pkg.tar.zst"
+          git add .gitattributes
 
       - name: Add new packages
         run: |

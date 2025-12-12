@@ -119,6 +119,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install GIT LFS
+        run: |
+          git lfs install
+
       - name: Download signed grub
         uses: actions/download-artifact@v4
         with:
@@ -132,6 +136,11 @@ jobs:
             -w "$GITHUB_WORKSPACE" \
             archlinux:latest \
             sh -c "pacman -Sy --noconfirm pacman-contrib && ./add_new_pkgs.sh"
+
+      - name: Track files with GIT LFS
+        run: |
+          git lfs track "x86_64/*.pkg.tar.zst"
+          git add .gitattributes
 
       - name: Commit GRUB version update
         run: |
