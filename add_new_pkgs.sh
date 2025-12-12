@@ -91,5 +91,6 @@ done
 cd x86_64/
 sh update.sh
 cd ..
+python autogen.py
 
 echo -e "${GREEN}Done.${RESET} Mode: ${BOLD}$MODE${RESET}"

@@ -135,7 +135,7 @@ jobs:
             -v "$GITHUB_WORKSPACE":"$GITHUB_WORKSPACE" \
             -w "$GITHUB_WORKSPACE" \
             archlinux:latest \
-            sh -c "pacman -Sy --noconfirm pacman-contrib && ./add_new_pkgs.sh"
+            sh -c "pacman -Sy --noconfirm pacman-contrib python && ./add_new_pkgs.sh"
 
       - name: Track files with GIT LFS
         run: |
