@@ -1,0 +1,17 @@
+<html><head><title>Packages for x86_64</title>
+<script>
+function searchPackages(inputId, listId) {
+    const input = document.getElementById(inputId).value.toLowerCase();
+    const listItems = document.getElementById(listId).getElementsByTagName('li');
+    for (let i = 0; i < listItems.length; i++) {
+        const txt = listItems[i].innerText.toLowerCase();
+        listItems[i].style.display = txt.includes(input) ? '' : 'none';
+    }
+}
+</script>
+</head><body>
+<a href="../index.html">../</a>
+<h1>Packages for x86_64</h1>
+<input type="text" id="archSearch_x86_64" placeholder="Search..." onkeyup="searchPackages('archSearch_x86_64', 'pkgList_x86_64')">
+<ul id="pkgList_x86_64">
+<li><a href="https://media.githubusercontent.com/media/Byson94/CoreAxMirrors/refs/heads/main/x86_64/grub-2.14rc1.r54.g29f3131a-2-x86_64.pkg.tar.zst">grub-2</a></li><li><a href="https://media.githubusercontent.com/media/Byson94/CoreAxMirrors/refs/heads/main/x86_64/linux-6.17.9.arch1-1-x86_64.pkg.tar.zst">linux-6</a></li><li><a href="https://media.githubusercontent.com/media/Byson94/CoreAxMirrors/refs/heads/main/x86_64/linux-zen-6.17.9.zen1-1-x86_64.pkg.tar.zst">linux-zen-6</a></li></ul></body></html>
