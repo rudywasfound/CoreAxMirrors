@@ -5,7 +5,7 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-base_url = "https://raw.githubusercontent.com/axos-project/axmirrors/main/{arch}/{package}"
+base_url = "https://media.githubusercontent.com/media/Byson94/CoreAxMirrors/refs/heads/main/{arch}/{package}"
 
 # JavaScript for live search filtering
 search_script = """
