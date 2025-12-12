@@ -56,7 +56,14 @@ jobs:
         run: |
           CACHE_FILE="kernel-cache.txt"
 
+          echo "## Current detected versions"
+          echo "LTS:     ${{ steps.versions.outputs.lts }}"
+          echo "NORMAL:  ${{ steps.versions.outputs.normal }}"
+          echo "ZEN:     ${{ steps.versions.outputs.zen }}"
+          echo ""
+
           if [ ! -f "$CACHE_FILE" ]; then
+            echo "## Cache file missing — creating new one"
             printf "%s\n%s\n%s\n" \
               "${{ steps.versions.outputs.lts }}" \
               "${{ steps.versions.outputs.normal }}" \
@@ -67,31 +74,54 @@ jobs:
             exit 0
           fi
 
-          read OLD_LTS OLD_NORMAL OLD_ZEN < <(cat "$CACHE_FILE")
+          echo "## Cache file exists. Contents:"
+          cat "$CACHE_FILE"
+          echo ""
+
+          mapfile -t CACHE < "$CACHE_FILE"
+          OLD_LTS="${CACHE[0]}"
+          OLD_NORMAL="${CACHE[1]}"
+          OLD_ZEN="${CACHE[2]}"
+
+          echo "## Parsed cache values"
+          echo "OLD_LTS:     $OLD_LTS"
+          echo "OLD_NORMAL:  $OLD_NORMAL"
+          echo "OLD_ZEN:     $OLD_ZEN"
+          echo ""
 
           if [ "${{ steps.versions.outputs.lts }}" != "$OLD_LTS" ]; then
+            echo "LTS changed"
             echo "lts_updated=true" >> $GITHUB_OUTPUT
           else
+            echo "LTS unchanged"
             echo "lts_updated=false" >> $GITHUB_OUTPUT
           fi
 
           if [ "${{ steps.versions.outputs.normal }}" != "$OLD_NORMAL" ]; then
+            echo "NORMAL changed"
             echo "normal_updated=true" >> $GITHUB_OUTPUT
           else
+            echo "NORMAL unchanged"
             echo "normal_updated=false" >> $GITHUB_OUTPUT
           fi
 
           if [ "${{ steps.versions.outputs.zen }}" != "$OLD_ZEN" ]; then
+            echo "ZEN changed"
             echo "zen_updated=true" >> $GITHUB_OUTPUT
           else
+            echo "ZEN unchanged"
             echo "zen_updated=false" >> $GITHUB_OUTPUT
           fi
 
+          echo ""
+          echo "## Writing new cache values"
           printf "%s\n%s\n%s\n" \
             "${{ steps.versions.outputs.lts }}" \
             "${{ steps.versions.outputs.normal }}" \
             "${{ steps.versions.outputs.zen }}" > "$CACHE_FILE"
 
+          echo "Updated cache:"
+          cat "$CACHE_FILE"
 
       - uses: actions/cache/save@v4
         name: Save Kernel cache
